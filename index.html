@@ -1,22 +1,47 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Testando as cores</title>
+    <title>Votação</title>
+    <link rel="stylesheet" href="syle.css">
 </head>
+
+
+
 <body>
-    <main>
-        
-    <H1>Vamos ver como irá ficar!</H1>
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta delectus voluptates consequuntur ducimus aut cumque? Qui laborum doloribus nam incidunt at, sit alias fugiat labore cumque explicabo, mollitia impedit distinctio.</p>
-    <h2>Capitulo 1</h2>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia in consequuntur labore quaerat facilis quasi commodi ut adipisci pariatur laborum sapiente, eum ipsam, dolore minus officia, fugiat natus repudiandae fugit?</p>
-     <h2>Capitulo 2</h2>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia in consequuntur labore quaerat facilis quasi commodi ut adipisci pariatur laborum sapiente, eum ipsam, dolore minus officia, fugiat natus repudiandae fugit?</p>
- <h2>Capitulo 3</h2>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia in consequuntur labore quaerat facilis quasi commodi ut adipisci pariatur laborum sapiente, eum ipsam, dolore minus officia, fugiat natus repudiandae fugit?</p>
-</main>
+    <h1>Questionário para votação:</h1>
+
+    Qual é seu nome? <input type="text" name="nome" id="nome">
+    Qual é sua idade? <input type="text" name="idade" id="idade">
+    <input type="button" value="Verificar" onclick="calcular()">
+
+    <div id="res">
+
+    </div>
+    <script>
+
+        function calcular() {
+            var inputIdade = window.document.querySelector('input#idade')
+            var inputNome = window.document.querySelector('input#nome')
+            var res = window.document.querySelector('div#res')
+
+            var idade = Number(inputIdade.value); // Convertendo para número
+            var nome = inputNome.value;
+
+            res.innerHTML = `<p> Olá, ${nome}! Você possui ${idade} anos de idade</p>`
+
+            if (idade < 16) { // Para idades menores que 16, não pode votar
+                res.innerHTML += `<p>Você ainda não pode votar.</p>`;
+            } else if (idade < 18 || idade > 65) { // Entre 16 e 17, ou acima de 65, o voto é opcional
+                res.innerHTML += `<p class="opcional">Voto opcional!</p>`;
+            } else { // Idades entre 18 e 65 (inclusive)
+                res.innerHTML += `<p class="obrigatorio">Voto obrigatório!</p>`;
+            }
+        }
+    </script>
+
 </body>
+
 </html>
